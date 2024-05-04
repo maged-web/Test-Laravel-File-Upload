@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\House;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
 class HouseController extends Controller
@@ -45,7 +46,7 @@ class HouseController extends Controller
         $filePath = storage_path("app/houses/{$house->photo}");
         if(file_exists($filePath))
         {
-            return response()->download($filePath);
+            return Storage::download($filePath);
         }
         else {
             return response()->json(['error' => 'File not found'], 404);
