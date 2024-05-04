@@ -43,12 +43,13 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
-        $filePath = 'houses/' . $house->photo;
+        $filePath = storage_path('app/houses/' . $house->photo);
 
-    if (Storage::exists($filePath)) {
-        return Storage::download($filePath);
-    } else {
-        abort(404, 'File not found');
-    }
+        // Check if the file exists
+        if (!Storage::exists('houses/' . $house->photo)) {
+            abort(404);
+        }
+    
+        return response()->download($filePath, $house->photo);
     }
 }
