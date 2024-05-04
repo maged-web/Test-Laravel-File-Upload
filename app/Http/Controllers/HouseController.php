@@ -42,9 +42,8 @@ class HouseController extends Controller
     public function download(House $house)
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
+        // for download in browser
         $filePath = storage_path('app/houses/' . $house->photo);
-
         return response()->download($filePath);
-        //return Storage::download('houses/' . $house->photo);
     }
 }
